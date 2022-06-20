@@ -1,7 +1,4 @@
-(defpackage forge-system
-  (:use :common-lisp)
-  (:export :execute))
-(in-package forge-system)
+(in-package system)
 
 (defun execute (command-string)
   (fresh-line)

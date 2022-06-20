@@ -1,16 +1,13 @@
 #!/usr/bin/sbcl --script
 
+;; Need to get rid of the below two lines
 (load "~/quicklisp/setup.lisp")
 (ql:quickload "asdf")
 
-(load "packages/forge-system.lisp")
+(load "package.lisp")
+(load "system.lisp")
 
-(defpackage forge-start
-  (:use :common-lisp)
-  (:import-from :forge-system
-                :execute)
-  (:export :main))
-(in-package forge-start)
+(in-package start)
 
 (defparameter forge-user-config '())
 (defun main ()
@@ -20,6 +17,5 @@
     ;; Echo the user config
     (princ forge-user-config)
     ;; Consume a function from forge-system
-    (execute "whoami")
-    ))
+    (execute "whoami")))
 (main)
