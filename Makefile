@@ -21,7 +21,7 @@ req: deps
 
 quicklisp:
 	curl https://beta.quicklisp.org/quicklisp.lisp -o /tmp/quicklisp.lisp
-	sbcl --script ./bootstrap-quicklisp.lisp
+	sbcl --load "/tmp/quicklisp.lisp" --non-interactive --eval "(quicklisp-quickstart:install)"
 
 install: req quicklisp
 	@echo "forge is now installed."
