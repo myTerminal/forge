@@ -1,7 +1,7 @@
 help:
 	@echo "Use a command!"
 
-deps:
+sbcl:
 	@echo "Making sure SBCL is installed..."
 ifneq ($(shell command -v xbps-query),)
 	sudo xbps-install -Syu sbcl
@@ -17,11 +17,13 @@ else
 	@echo "Could not determine steps to install SBCL! Please install SBCL and try again."
 endif
 
-req: deps
-
 quicklisp:
 	curl https://beta.quicklisp.org/quicklisp.lisp -o /tmp/quicklisp.lisp
 	sbcl --load "/tmp/quicklisp.lisp" --non-interactive --eval "(quicklisp-quickstart:install)"
 
-install: req quicklisp
+binary:
+	@echo "TODO: Implement creation of binary"
+	@echo "Not implemented yet!"
+
+install: sbcl quicklisp binary
 	@echo "forge is now installed."
