@@ -1,4 +1,4 @@
-(in-package system)
+(in-package :system)
 
 (defun execute (command-string)
   (fresh-line)

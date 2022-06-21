@@ -22,8 +22,8 @@ quicklisp:
 	sbcl --load "/tmp/quicklisp.lisp" --non-interactive --eval "(quicklisp-quickstart:install)"
 
 binary:
-	@echo "TODO: Implement creation of binary"
-	@echo "Not implemented yet!"
+	@echo "Generating binary"
+	sbcl --non-interactive --load build.lisp
 
 install: sbcl quicklisp binary
 	@echo "forge is now installed."

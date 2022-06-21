@@ -1,8 +1,8 @@
-(defpackage system
+(defpackage :system
   (:use :cl)
   (:export :execute))
 
-(defpackage start
+(defpackage :main
   (:use :cl)
   (:import-from :system
                 :execute)
