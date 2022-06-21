@@ -20,6 +20,7 @@ endif
 quicklisp:
 	curl https://beta.quicklisp.org/quicklisp.lisp -o /tmp/quicklisp.lisp
 	sbcl --load "/tmp/quicklisp.lisp" --non-interactive --eval "(quicklisp-quickstart:install)"
+	sbcl --load "/tmp/quicklisp.lisp" --non-interactive --eval "(ql:add-to-init-file)"
 
 binary:
 	@echo "Generating binary"
