@@ -1,11 +1,17 @@
 (in-package :main)
 
-(defparameter forge-user-config '(Something))
+(defvar forge-user-config nil)
 (defun main ()
-  (let ((config-file (or (first (uiop:command-line-arguments))
-                         "example/forge-user-config.lisp")))
-    (load config-file)
-    ;; Echo the user config
-    (print forge-user-config)
-    ;; Consume a function from forge-system
-    (execute "whoami")))
+  (let ((config-file-path (or (first (uiop:command-line-arguments))
+                              "example/forge-user-config.lisp")))
+    (with-open-file (file-stream config-file-path)
+      (setf forge-user-config (read-from-string (reduce (lambda (a b)
+                                                          (concatenate 'string a b))
+                                                        (loop for i from 0
+                                                              for line = (read-line file-stream nil nil)
+                                                              while line
+                                                              collect line))))))
+  ;; Echo the loaded user config
+  (print forge-user-config)
+  ;; Consume a function from forge-system
+  (execute "whoami"))
