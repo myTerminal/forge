@@ -1,4 +1,5 @@
 (load "package.lisp")
+(load "utils.lisp")
 (load "system.lisp")
 (load "main.lisp")
 
