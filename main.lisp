@@ -14,6 +14,6 @@
   ;; Echo the loaded user config
   (print forge-user-config)
   ;; Consume functions from system
-  (execute-in-system "whoami")
+  (print (get-result-from-system "whoami"))
   (print (get-list-from-system "ls"))
   (print (exists-in-system-p "cat")))
