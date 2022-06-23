@@ -6,9 +6,11 @@
 
 (defun get-list-from-system (command-string)
   (string-to-list (uiop:run-program command-string
-                    :output '(:string :stripped t))))
+                                    :output '(:string :stripped t))))
 
 (defun exists-in-system-p (command-string)
-  ;; TODO: Implement
-  (print command-string)
-  (print "Not implemented!"))
+  (not (null (uiop:run-program (concatenate 'string
+                                            "command -v "
+                                            command-string)
+                               :output t
+                               :ignore-error-status t))))
