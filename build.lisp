@@ -1,7 +1,7 @@
 (load "package.lisp")
-(load "utils.lisp")
-(load "system.lisp")
-(load "main.lisp")
+(load "src/utils.lisp")
+(load "src/system.lisp")
+(load "src/main.lisp")
 
 (sb-ext:save-lisp-and-die "forge-bin"
                           :toplevel 'main:main
