@@ -1,5 +1,10 @@
 (in-package :system)
 
+(defun execute-in-system (command-string)
+  ;; TODO: Implement
+  (print command-string)
+  (print "Not implemented!"))
+
 (defun get-result-from-system (command-string)
   (uiop:run-program command-string
                     :output '(:string :stripped t)))
