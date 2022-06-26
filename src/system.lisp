@@ -1,9 +1,9 @@
 (in-package :system)
 
 (defun execute-in-system (command-string)
-  ;; TODO: Implement
-  (print command-string)
-  (print "Not implemented!"))
+  (uiop:run-program command-string
+                    :input :interactive
+                    :output :interactive))
 
 (defun get-result-from-system (command-string)
   (uiop:run-program command-string
