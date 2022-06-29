@@ -8,7 +8,11 @@
   (print system-config)
   (print packages))
 
-(defun execute-applicable-steps (steps)
+(defun get-applicable-steps (steps)
+  ;; TODO: Implement
+  steps)
+
+(defun execute-steps (steps)
   ;; TODO: Implement
   (print steps))
 
@@ -36,4 +40,4 @@
                       (car forge-user-config))
 
     ;; Execute all applicable steps
-    (execute-applicable-steps (cdr forge-user-config))))
+    (execute-steps (get-applicable-steps (cdr forge-user-config)))))
