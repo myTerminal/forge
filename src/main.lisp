@@ -3,6 +3,20 @@
 (defvar forge-system-config nil)
 (defvar forge-user-config nil)
 
+(defun print-help ()
+  (princ "No arguments specified!")
+  (fresh-line)
+  (princ "Please specify a run-mode and optionally a config.")
+  (fresh-line)
+  (princ "Following run-modes are available:")
+  (fresh-line)
+  (princ "0 - Log commands to be executed, only simulate a run")
+  (fresh-line)
+  (princ "1 - Execute commands as usual")
+  (fresh-line)
+  (princ "2 - Do a combination of both 0 and 1")
+  (fresh-line))
+
 (defun install-packages (system-config packages)
   ;; TODO: Implement
   (print system-config)
@@ -25,8 +39,7 @@
     ;; Print 'help' in case of no arguments
     (unless command-line-arguments
       (progn
-        (princ "Please specify a run-mode (0, 1, or 2) and optionally a config!")
-        (fresh-line)
+        (print-help)
         (uiop:quit)))
 
     ;; Load system and user configs
