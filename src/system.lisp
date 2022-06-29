@@ -13,7 +13,7 @@
             (string-equal run-mode "2"))
         (uiop:run-program command-string
                           :input :interactive
-                          :output :interactive
+                          :output *standard-output*
                           :error-output t
                           :ignore-error-status t))))
 
