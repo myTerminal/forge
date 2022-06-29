@@ -14,7 +14,6 @@
 
 (defun main ()
   (let* ((command-line-arguments (uiop:command-line-arguments))
-         (run-mode (first command-line-arguments))
          (system-config-file-path "config.lisp")
          (user-config-file-path (or (second command-line-arguments)
                                     "example/forge-user-config.lisp")))

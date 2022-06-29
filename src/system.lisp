@@ -1,11 +1,24 @@
 (in-package :system)
 
+(defun execute-maybe (command-string)
+  (let* ((command-line-arguments (uiop:command-line-arguments))
+         (run-mode (first command-line-arguments)))
+    (if (or (string-equal run-mode "0")
+            (string-equal run-mode "2"))
+        (progn
+          (princ (concatenate 'string "[forge executing]: "
+                              command-string))
+          (fresh-line)))
+    (if (or (string-equal run-mode "1")
+            (string-equal run-mode "2"))
+        (uiop:run-program command-string
+                          :input :interactive
+                          :output :interactive
+                          :error-output t
+                          :ignore-error-status t))))
+
 (defun execute-in-system (command-string)
-  (uiop:run-program command-string
-                    :input :interactive
-                    :output :interactive
-                    :error-output t
-                    :ignore-error-status t))
+  (execute-maybe command-string))
 
 (defun get-result-from-system (command-string)
   (uiop:run-program command-string
