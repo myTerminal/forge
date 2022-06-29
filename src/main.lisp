@@ -17,12 +17,13 @@
   (princ "2 - Do a combination of both 0 and 1")
   (fresh-line))
 
-(defun install-packages (system-config packages)
+(defun install-packages (current-platform system-config packages)
   ;; TODO: Implement
+  (print current-platform)
   (print system-config)
   (print packages))
 
-(defun get-applicable-steps (steps)
+(defun get-applicable-steps (current-platform steps)
   ;; TODO: Implement
   steps)
 
@@ -34,7 +35,8 @@
   (let* ((command-line-arguments (uiop:command-line-arguments))
          (system-config-file-path "config.lisp")
          (user-config-file-path (or (second command-line-arguments)
-                                    "example/forge-user-config.lisp")))
+                                    "example/forge-user-config.lisp"))
+         (current-platform (get-current-operating-platform)))
 
     ;; Print 'help' in case of no arguments
     (unless command-line-arguments
@@ -49,8 +51,10 @@
           (file-to-string user-config-file-path))
 
     ;; Install packages for current platform
-    (install-packages forge-system-config
+    (install-packages current-platform
+                      forge-system-config
                       (car forge-user-config))
 
     ;; Execute all applicable steps
-    (execute-steps (get-applicable-steps (cdr forge-user-config)))))
+    (execute-steps (get-applicable-steps current-platform
+                                         (cdr forge-user-config)))))

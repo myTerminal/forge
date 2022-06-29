@@ -33,3 +33,7 @@
   (not (null (get-result-from-system (concatenate 'string
                                                   "command -v "
                                                   command-string)))))
+
+(defun get-current-operating-platform ()
+  ;; TODO: Implement
+  nil)

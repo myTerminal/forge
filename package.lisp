@@ -10,7 +10,8 @@
   (:export :execute-in-system
            :get-result-from-system
            :get-list-from-system
-           :exists-in-system-p))
+           :exists-in-system-p
+           :get-current-operating-platform))
 
 (defpackage :main
   (:use :cl)
@@ -20,5 +21,6 @@
                 :execute-in-system
                 :get-result-from-system
                 :get-list-from-system
-                :exists-in-system-p)
+                :exists-in-system-p
+                :get-current-operating-platform)
   (:export :main))
