@@ -1,6 +1,7 @@
 (defpackage :utils
   (:use :cl)
-  (:export :string-to-list))
+  (:export :string-to-list
+           :file-to-string))
 
 (defpackage :system
   (:use :cl)
@@ -13,6 +14,8 @@
 
 (defpackage :main
   (:use :cl)
+  (:import-from :utils
+                :file-to-string)
   (:import-from :system
                 :execute-in-system
                 :get-result-from-system
