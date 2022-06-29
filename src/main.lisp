@@ -13,9 +13,12 @@
   (print steps))
 
 (defun main ()
-  (let ((system-config-file-path "config.lisp")
-        (user-config-file-path (or (first (uiop:command-line-arguments))
-                                   "example/forge-user-config.lisp")))
+  (let* ((command-line-arguments (uiop:command-line-arguments))
+         (run-mode (first command-line-arguments))
+         (system-config-file-path "config.lisp")
+         (user-config-file-path (or (second command-line-arguments)
+                                    "example/forge-user-config.lisp")))
+
     ;; Load system and user configs
     (setf forge-system-config
           (file-to-string system-config-file-path))
