@@ -35,5 +35,12 @@
                                                   command-string)))))
 
 (defun get-current-operating-platform ()
-  ;; TODO: Implement
-  nil)
+  (cond ((exists-in-system-p "xbps-query")
+         :void)
+        ((exists-in-system-p "pacman")
+         :arch)
+        ((exists-in-system-p "dnf")
+         :fedora)
+        ((exists-in-system-p "apt")
+         :debian)
+        (t nil)))
