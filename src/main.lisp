@@ -17,7 +17,7 @@
   (princ "2 - Do a combination of both 0 and 1")
   (fresh-line))
 
-(defun get-relevant-packages (current-platform packages)
+(defun get-relevant-package-entries (current-platform packages)
   (labels ((does-omit-package-for-platform (platform package)
              (let ((package-reference (find platform
                                             (cdr package)
@@ -31,6 +31,10 @@
                                                                       package)))
                              package))
                        packages))))
+
+(defun get-relevant-packages (current-platform package-entries)
+  ;; TODO: Implement
+  package-entries)
 
 (defun install-packages (current-platform system-config packages)
   (let ((primary-package-manager (car (find current-platform
@@ -81,7 +85,8 @@
     (install-packages current-platform
                       forge-system-config
                       (get-relevant-packages current-platform
-                                             (car forge-user-config)))
+                                             (get-relevant-package-entries current-platform
+                                                                           (car forge-user-config))))
 
     ;; Execute all applicable steps
     (execute-steps (get-applicable-steps current-platform
