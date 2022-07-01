@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/github/license/myTerminal/forge.svg)](https://opensource.org/licenses/MIT)
 
-Quickly create your daily-driver workstation setup
+Quickly create your daily-driver workstation setup from a simple-to-read configuration file
 
 ## What is it?
 
@@ -23,10 +23,6 @@ This project takes birth from [one of my oldest projects](https://github.com/myT
 ## How to Use
 
 (Coming soon...)
-
-## Possible futures of *forge*
-
-I'm still in the process of evaluating Common Lisp as a language and SBCL as a platform to achieve a re-usable utility. With my limited experience with Lisp, even if this gets to see the light of the day, I'm not sure of the outcome and in case it doesn't, it'll stay here as a reference for myself or anyone else trying to achieve something similar.
 
 ## To-Do
 
