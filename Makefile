@@ -26,5 +26,5 @@ binary:
 	@echo "Generating binary"
 	sbcl --non-interactive --load build.lisp
 
-install: sbcl quicklisp binary
+setup: sbcl quicklisp binary
 	@echo "forge is now installed."
