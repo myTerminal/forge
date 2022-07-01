@@ -17,11 +17,28 @@
   (princ "2 - Do a combination of both 0 and 1")
   (fresh-line))
 
+(defun get-relevant-packages (current-platform packages)
+  (labels ((does-omit-package-for-platform (platform package)
+             (let ((package-reference (find platform
+                                            (cdr package)
+                                            :key #'car)))
+               (and package-reference
+                    (null (cadr package-reference))))))
+    (remove-if #'null
+               (mapcar (lambda (package)
+                         (if (or (null (cdr package))
+                                 (not (does-omit-package-for-platform current-platform
+                                                                      package)))
+                             package))
+                       packages))))
+
 (defun install-packages (current-platform system-config packages)
-  ;; TODO: Implement
-  (print current-platform)
-  (print system-config)
-  (print packages))
+  (let ((primary-package-manager (car (find current-platform
+                                            (car system-config)
+                                            :key #'car))))
+    ;; TODO: Implement
+    (print primary-package-manager)
+    (print packages)))
 
 (defun get-applicable-steps (current-platform steps)
   (remove-if #'null
@@ -63,7 +80,8 @@
     ;; Install packages for current platform
     (install-packages current-platform
                       forge-system-config
-                      (car forge-user-config))
+                      (get-relevant-packages current-platform
+                                             (car forge-user-config)))
 
     ;; Execute all applicable steps
     (execute-steps (get-applicable-steps current-platform
