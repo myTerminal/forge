@@ -24,8 +24,18 @@
   (print packages))
 
 (defun get-applicable-steps (current-platform steps)
-  ;; TODO: Implement
-  steps)
+  (remove-if #'null
+             (mapcar (lambda (step)
+                       `(,(car step)
+                          ,(cadar (remove-if-not (lambda (element)
+                                                   (if (or (eql (car element)
+                                                                current-platform)
+                                                           (eql (car element)
+                                                                :all))
+                                                       element))
+                                                 (cddr step)))
+                          ,(cadr step)))
+                     steps)))
 
 (defun execute-steps (steps)
   ;; TODO: Implement
