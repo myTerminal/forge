@@ -32,17 +32,26 @@
                              package))
                        packages))))
 
-(defun get-relevant-packages (current-platform package-entries)
-  ;; TODO: Implement
-  package-entries)
-
-(defun install-packages (current-platform system-config packages)
-  (let ((primary-package-manager (car (find current-platform
+(defun get-relevant-packages (current-platform system-config package-entries)
+  (let* ((known-package-managers (cdr (find current-platform
                                             (car system-config)
-                                            :key #'car))))
-    ;; TODO: Implement
-    (print primary-package-manager)
-    (print packages)))
+                                            :key #'car)))
+         (primary-package-manager (car known-package-managers)))
+    (mapcar (lambda (entry)
+              (let* ((relevant-sources (remove-if #'null
+                                                  (mapcar (lambda (package-manager)
+                                                            (find package-manager
+                                                                  (cdr entry)
+                                                                  :key #'car))
+                                                          known-package-managers))))
+                (cond ((null relevant-sources) `(,primary-package-manager ,(car entry)))
+                      (t (car relevant-sources)))))
+            package-entries)))
+
+(defun install-packages (system-config packages)
+  ;; TODO: Implement
+  (print (cdr system-config))
+  (print packages))
 
 (defun get-applicable-steps (current-platform steps)
   (remove-if #'null
@@ -82,9 +91,9 @@
           (file-to-string user-config-file-path))
 
     ;; Install packages for current platform
-    (install-packages current-platform
-                      forge-system-config
+    (install-packages forge-system-config
                       (get-relevant-packages current-platform
+                                             forge-system-config
                                              (get-relevant-package-entries current-platform
                                                                            (car forge-user-config))))
 
