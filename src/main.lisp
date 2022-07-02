@@ -1,8 +1,5 @@
 (in-package :main)
 
-(defvar forge-system-config nil)
-(defvar forge-user-config nil)
-
 (defun print-help ()
   (princ "No arguments specified!")
   (fresh-line)
@@ -72,11 +69,7 @@
   (print steps))
 
 (defun main ()
-  (let* ((command-line-arguments (uiop:command-line-arguments))
-         (system-config-file-path "config.lisp")
-         (user-config-file-path (or (second command-line-arguments)
-                                    "example/forge-user-config.lisp"))
-         (current-platform (get-current-operating-platform)))
+  (let ((command-line-arguments (uiop:command-line-arguments)))
 
     ;; Print 'help' in case of no arguments
     (unless command-line-arguments
@@ -84,19 +77,21 @@
         (print-help)
         (uiop:quit)))
 
-    ;; Load system and user configs
-    (setf forge-system-config
-          (file-to-string system-config-file-path))
-    (setf forge-user-config
-          (file-to-string user-config-file-path))
+    ;; Load configs and continue
+    (let* ((system-config-file-path "config.lisp")
+           (forge-system-config (file-to-string system-config-file-path))
+           (user-config-file-path (or (second command-line-arguments)
+                                      "example/forge-user-config.lisp"))
+           (forge-user-config (file-to-string user-config-file-path))
+           (current-platform (get-current-operating-platform)))
 
-    ;; Install packages for current platform
-    (install-packages forge-system-config
-                      (get-relevant-packages current-platform
-                                             forge-system-config
-                                             (get-relevant-package-entries current-platform
-                                                                           (car forge-user-config))))
+      ;; Install packages for current platform
+      (install-packages forge-system-config
+                        (get-relevant-packages current-platform
+                                               forge-system-config
+                                               (get-relevant-package-entries current-platform
+                                                                             (car forge-user-config))))
 
-    ;; Execute all applicable steps
-    (execute-steps (get-applicable-steps current-platform
-                                         (cdr forge-user-config)))))
+      ;; Execute all applicable steps
+      (execute-steps (get-applicable-steps current-platform
+                                           (cdr forge-user-config))))))
