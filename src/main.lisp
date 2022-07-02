@@ -33,17 +33,25 @@
   (let* ((known-package-managers (cdr (find current-platform
                                             (car system-config)
                                             :key #'car)))
-         (primary-package-manager (car known-package-managers)))
-    (mapcar (lambda (entry)
-              (let* ((relevant-sources (remove-if #'null
-                                                  (mapcar (lambda (package-manager)
-                                                            (find package-manager
-                                                                  (cdr entry)
-                                                                  :key #'car))
-                                                          known-package-managers))))
-                (cond ((null relevant-sources) `(,primary-package-manager ,(car entry)))
-                      (t (car relevant-sources)))))
-            package-entries)))
+         (primary-package-manager (car known-package-managers))
+         (relevant-packages (mapcar (lambda (entry)
+                                      (let* ((relevant-sources (remove-if #'null
+                                                                          (mapcar (lambda (package-manager)
+                                                                                    (find package-manager
+                                                                                          (cdr entry)
+                                                                                          :key #'car))
+                                                                                  known-package-managers))))
+                                        (cond ((null relevant-sources) `(,primary-package-manager ,(car entry)))
+                                              (t (car relevant-sources)))))
+                                    package-entries)))
+    (mapcar (lambda (package-manager)
+              `(,package-manager . ,(flatten (mapcar (lambda (package)
+                                                       (cdr package))
+                                                     (remove-if-not (lambda (package)
+                                                                      (eql (car package)
+                                                                           package-manager))
+                                                                    relevant-packages)))))
+            known-package-managers)))
 
 (defun install-packages (system-config packages)
   ;; TODO: Implement

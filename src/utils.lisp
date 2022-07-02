@@ -1,5 +1,11 @@
 (in-package :utils)
 
+(defun flatten (items)
+  (reduce (lambda (a item)
+            (append a item))
+          items
+          :initial-value '()))
+
 (defun string-to-list (input-string)
   (let* ((temp-chars '())
          (items '()))
