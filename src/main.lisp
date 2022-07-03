@@ -1,6 +1,10 @@
+;;;; -------------------------------------------------------------------------
+;;;; main
+
 (in-package :main)
 
 (defun print-help ()
+  "Prints help text for the program."
   (princ "No arguments specified!")
   (fresh-line)
   (princ "Please specify a run-mode and optionally a config.")
@@ -15,6 +19,8 @@
   (fresh-line))
 
 (defun get-relevant-package-entries (current-platform packages)
+  "Gets package entries from the configuration that are relevant for the
+current operating platform."
   (labels ((does-omit-package-for-platform (platform package)
              (let ((package-reference (find platform
                                             (cdr package)
@@ -30,6 +36,8 @@
                        packages))))
 
 (defun get-relevant-packages (current-platform system-config package-entries)
+  "Gets information about packages and their respective package manager sources
+from their respective package entries."
   (let* ((known-package-managers (cdr (find current-platform
                                             (car system-config)
                                             :key #'car)))
@@ -54,11 +62,14 @@
             known-package-managers)))
 
 (defun install-packages (system-config packages)
+  "Installs the supplied packages using the supplied system config."
   ;; TODO: Implement
   (print (cdr system-config))
   (print packages))
 
 (defun get-applicable-steps (current-platform steps)
+  "Gets the applicable steps for the current platform from among the supplied
+steps."
   (remove-if #'null
              (mapcar (lambda (step)
                        `(,(car step)
@@ -73,10 +84,12 @@
                      steps)))
 
 (defun execute-steps (steps)
+  "Executes the supplied steps."
   ;; TODO: Implement
   (print steps))
 
 (defun main ()
+  "The main entry point to the program."
   (let ((command-line-arguments (uiop:command-line-arguments)))
 
     ;; Print 'help' in case of no arguments
