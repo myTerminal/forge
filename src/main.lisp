@@ -64,8 +64,8 @@ from their respective package entries."
 (defun install-packages (system-config packages)
   "Installs the supplied packages using the supplied system config."
   ;; TODO: Implement
-  (print (cdr system-config))
-  (print packages))
+  (cdr system-config)
+  packages)
 
 (defun get-applicable-steps (current-platform steps)
   "Gets the applicable steps for the current platform from among the supplied
