@@ -83,10 +83,29 @@ steps."
                           ,(cadr step)))
                      steps)))
 
+(defun execute-step-commands (commands)
+  "Execute commands contained in the steps."
+  (mapc (lambda (command)
+          (fresh-line)
+          (execute-in-system command))
+        commands))
+
+(defun execute-step (step)
+  "Executes the supplied step."
+  (fresh-line)
+  (princ (first step))
+  (if (third step)
+      (progn
+        (fresh-line)
+        (princ "Execute?")
+        (if t ; TODO: Implement reading a character from the user
+            (execute-step-commands (second step))))
+      (execute-step-commands (second step))))
+
 (defun execute-steps (steps)
   "Executes the supplied steps."
-  ;; TODO: Implement
-  (print steps))
+  (mapc #'execute-step
+        steps))
 
 (defun main ()
   "The main entry point to the program."
