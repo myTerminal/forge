@@ -27,10 +27,6 @@ supplied during the program execution."
   "Executes the supplied command string, if its appropriate to do so."
   (execute-maybe command-string))
 
-(defun clear-screen ()
-  "Clears the terminal screen."
-  (execute-in-system "clear"))
-
 (defun get-result-from-system (command-string)
   "Gets the result of execution of the supplied command string in the
 underlying system."
@@ -50,6 +46,12 @@ a list."
                                                           "command -v "
                                                           command-string))
                      "")))
+
+(defun clear-screen ()
+  "Clears the terminal screen."
+  (if (exists-in-system-p "clear")
+      (execute-in-system "clear")
+      (execute-in-system "cls")))
 
 (defun get-current-operating-platform ()
   "Determines the operating platform of the underlying system."
