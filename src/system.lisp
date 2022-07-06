@@ -46,9 +46,10 @@ a list."
 
 (defun exists-in-system-p (command-string)
   "Returns whether the supplied command exists in the underlying system."
-  (not (null (get-result-from-system (concatenate 'string
-                                                  "command -v "
-                                                  command-string)))))
+  (not (string-equal (get-result-from-system (concatenate 'string
+                                                          "command -v "
+                                                          command-string))
+                     "")))
 
 (defun get-current-operating-platform ()
   "Determines the operating platform of the underlying system."
