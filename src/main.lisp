@@ -109,6 +109,10 @@ steps."
 
 (defun main ()
   "The main entry point to the program."
+  ;; Clear the screen before starting the program
+  (clear-screen)
+
+  ;; Process command-line arguments and start the execution
   (let ((command-line-arguments (uiop:command-line-arguments)))
 
     ;; Print 'help' in case of no arguments

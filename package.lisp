@@ -9,6 +9,7 @@
   (:import-from :utils
                 :string-to-list)
   (:export :execute-in-system
+           :clear-screen
            :get-result-from-system
            :get-list-from-system
            :exists-in-system-p
@@ -21,6 +22,7 @@
                 :file-to-string)
   (:import-from :system
                 :execute-in-system
+                :clear-screen
                 :get-result-from-system
                 :get-list-from-system
                 :exists-in-system-p
