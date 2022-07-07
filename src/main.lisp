@@ -99,7 +99,12 @@ steps."
         (princ " > Run (Y/n)?")
         (fresh-line)
         (if (prompt-y-or-n)
-            (execute-step-commands (second step))))
+            (execute-step-commands (second step))
+            (progn
+              (princ (concatenate 'string
+                                  "[Skipped]: "
+                                  (first step)))
+              (fresh-line))))
       (execute-step-commands (second step))))
 
 (defun execute-steps (steps)
