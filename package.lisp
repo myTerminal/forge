@@ -10,6 +10,7 @@
                 :string-to-list)
   (:export :execute-in-system
            :get-result-from-system
+           :prompt-y-or-n
            :get-list-from-system
            :exists-in-system-p
            :clear-screen
@@ -23,6 +24,7 @@
   (:import-from :system
                 :clear-screen
                 :execute-in-system
+                :prompt-y-or-n
                 :get-result-from-system
                 :get-list-from-system
                 :exists-in-system-p

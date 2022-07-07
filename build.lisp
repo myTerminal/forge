@@ -1,3 +1,4 @@
+(ql:quickload "trivial-raw-io")
 (load "package.lisp")
 (load "src/utils.lisp")
 (load "src/system.lisp")

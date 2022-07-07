@@ -35,6 +35,11 @@ underlying system."
                     :error-output t
                     :ignore-error-status t))
 
+(defun prompt-y-or-n ()
+  "Gets Y or N from the interface."
+  (member (trivial-raw-io:read-char)
+          '(#\y #\Y #\Newline)))
+
 (defun get-list-from-system (command-string)
   "Executes the supplied command string in the underlying system and returns
 a list."

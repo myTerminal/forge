@@ -96,9 +96,9 @@ steps."
   (princ (first step))
   (if (third step)
       (progn
+        (princ " > Run (Y/n)?")
         (fresh-line)
-        (princ "Execute?")
-        (if t ; TODO: Implement reading a character from the user
+        (if (prompt-y-or-n)
             (execute-step-commands (second step))))
       (execute-step-commands (second step))))
 
