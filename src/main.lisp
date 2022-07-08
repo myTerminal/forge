@@ -35,7 +35,7 @@ current operating platform."
                              package))
                        packages))))
 
-(defun get-relevant-packages (current-platform system-config package-entries)
+(defun get-relevant-package-groups (current-platform system-config package-entries)
   "Gets information about packages and their respective package manager sources
 from their respective package entries."
   (let* ((known-package-managers (cdr (find current-platform
@@ -61,11 +61,41 @@ from their respective package entries."
                                                                     relevant-packages)))))
             known-package-managers)))
 
-(defun install-packages (system-config packages)
-  "Installs the supplied packages using the supplied system config."
-  ;; TODO: Implement
-  (cdr system-config)
-  packages)
+(defun generate-install-command (package-manager packages)
+  "Generates installation command for the supplied package-manage for the
+supplied packages."
+  (let ((command-prefix (concatenate 'string
+                                     (if (fourth package-manager)
+                                         "sudo ")
+                                     (second package-manager))))
+    (if (equal (third package-manager)
+               :multi)
+        (concatenate 'string
+                     command-prefix
+                     " "
+                     (reduce (lambda (a b)
+                               (concatenate 'string
+                                            a
+                                            " "
+                                            b))
+                             packages))
+        (mapcar (lambda (package)
+                  (concatenate 'string
+                               command-prefix
+                               " "
+                               package))
+                packages))))
+
+(defun install-packages (system-config package-groups)
+  "Installs the supplied package-groups using the supplied system config."
+  (mapc #'execute-in-system
+        (flatten (mapcar (lambda (package-group)
+                           (let ((package-manager (find (car package-group)
+                                                        (second system-config)
+                                                        :key #'car)))
+                             (generate-install-command package-manager
+                                                       (cdr package-group))))
+                         package-groups))))
 
 (defun get-applicable-steps (current-platform steps)
   "Gets the applicable steps for the current platform from among the supplied
@@ -136,10 +166,10 @@ steps."
 
       ;; Install packages for current platform
       (install-packages forge-system-config
-                        (get-relevant-packages current-platform
-                                               forge-system-config
-                                               (get-relevant-package-entries current-platform
-                                                                             (car forge-user-config))))
+                        (get-relevant-package-groups current-platform
+                                                     forge-system-config
+                                                     (get-relevant-package-entries current-platform
+                                                                                   (car forge-user-config))))
 
       ;; Execute all applicable steps
       (execute-steps (get-applicable-steps current-platform
