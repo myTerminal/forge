@@ -6,7 +6,10 @@
 (defun flatten (items)
   "Flattens the supplied nested list into a single-dimentional list."
   (reduce (lambda (a item)
-            (append a item))
+            (append a
+                    (if (listp item)
+                        item
+                        `(,item))))
           items
           :initial-value '()))
 
