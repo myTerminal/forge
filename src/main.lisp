@@ -173,4 +173,6 @@ steps."
 
       ;; Execute all applicable steps
       (execute-steps (get-applicable-steps current-platform
-                                           (cdr forge-user-config))))))
+                                           (cdr forge-user-config)))))
+  ;; Notify on completion
+  (princ "forge has finished performing the setup!"))
