@@ -100,17 +100,22 @@ supplied packages."
 (defun get-applicable-steps (current-platform steps)
   "Gets the applicable steps for the current platform from among the supplied
 steps."
-  (remove-if #'null
+  (remove-if (lambda (step)
+               (null (second step)))
              (mapcar (lambda (step)
-                       `(,(car step)
-                          ,(cadar (remove-if-not (lambda (element)
-                                                   (if (or (eql (car element)
-                                                                current-platform)
-                                                           (eql (car element)
-                                                                :all))
-                                                       element))
-                                                 (cddr step)))
-                          ,(cadr step)))
+                       `(,(first step)
+                          ,(flatten (reduce (lambda (a commands-set)
+                                              (append a
+                                                      (cdr commands-set)))
+                                            (remove-if-not (lambda (element)
+                                                             (if (or (eql (car element)
+                                                                          current-platform)
+                                                                     (eql (car element)
+                                                                          :all))
+                                                                 element))
+                                                           (cddr step))
+                                            :initial-value '()))
+                          ,(second step)))
                      steps)))
 
 (defun execute-step-commands (commands)
