@@ -160,7 +160,7 @@ steps."
     (let* ((system-config-file-path "config.lisp")
            (forge-system-config (file-to-string system-config-file-path))
            (user-config-file-path (or (second command-line-arguments)
-                                      "example/forge-user-config.lisp"))
+                                      "example/forge-config.lisp"))
            (forge-user-config (file-to-string user-config-file-path))
            (current-platform (get-current-operating-platform)))
 
