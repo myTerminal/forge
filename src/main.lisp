@@ -35,11 +35,11 @@ current operating platform."
                              package))
                        packages))))
 
-(defun get-relevant-package-groups (current-platform system-config package-entries)
+(defun get-relevant-package-groups (current-platform package-manager-info package-entries)
   "Gets information about packages and their respective package manager sources
 from their respective package entries."
   (let* ((known-package-managers (cdr (find current-platform
-                                            (car system-config)
+                                            package-manager-info
                                             :key #'car)))
          (primary-package-manager (car known-package-managers))
          (relevant-packages (mapcar (lambda (entry)
@@ -86,12 +86,12 @@ supplied packages."
                                package))
                 packages))))
 
-(defun install-packages (system-config package-groups)
+(defun install-packages (package-manager-commands package-groups)
   "Installs the supplied package-groups using the supplied system config."
   (mapc #'execute-in-system
         (flatten (mapcar (lambda (package-group)
                            (let ((package-manager (find (car package-group)
-                                                        (third system-config)
+                                                        package-manager-commands
                                                         :key #'car)))
                              (generate-install-command package-manager
                                                        (cdr package-group))))
@@ -177,14 +177,18 @@ steps."
            (forge-user-config (file-to-string user-config-file-path))
            (current-platform (get-current-operating-platform)))
 
+      ;; Setup/Add software sources for the current platform
+      (execute-steps (get-applicable-steps current-platform
+                                           (second forge-system-config)))
+
       ;; Install packages for current platform
-      (install-packages forge-system-config
+      (install-packages (third forge-system-config)
                         (get-relevant-package-groups current-platform
-                                                     forge-system-config
+                                                     (first forge-system-config)
                                                      (get-relevant-package-entries current-platform
                                                                                    (car forge-user-config))))
 
-      ;; Execute all applicable steps
+      ;; Execute all applicable user steps
       (execute-steps (get-applicable-steps current-platform
                                            (cdr forge-user-config)))))
   ;; Notify on completion
