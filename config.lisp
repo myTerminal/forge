@@ -90,6 +90,9 @@
   (:flatpak "flatpak install"
             :single
             nil)
+  (:snap "snap install"
+         :single
+         t)
   (:brew "brew install"
          :multi
          nil)
