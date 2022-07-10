@@ -161,6 +161,14 @@ steps."
         (print-help)
         (uiop:quit)))
 
+    ;; Validate run-mode
+    (unless (find (first command-line-arguments)
+                  '("simulate" "run" "debug")
+                  :test #'string-equal)
+      (princ "Please specify a valid run-mode!")
+      (fresh-line)
+      (uiop:quit))
+
     ;; Load configs and continue
     (let* ((system-config-file-path "config.lisp")
            (forge-system-config (file-to-string system-config-file-path))
