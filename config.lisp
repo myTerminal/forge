@@ -3,6 +3,7 @@
   (:debian :apt :flatpak :snap)
   (:arch :pacman :paru :flatpak :snap)
   (:void :xbps :flatpak)
+  (:mac :brew :cask)
   )
  (
   (:apt "apt install"
@@ -20,5 +21,11 @@
   (:flatpak "flatpak install"
             :single
             nil)
+  (:brew "brew install"
+         :multi
+         nil)
+  (:cask "brew install --cask"
+         :multi
+         nil)
   )
  )
