@@ -25,8 +25,5 @@
                 :clear-screen
                 :execute-in-system
                 :prompt-y-or-n
-                :get-result-from-system
-                :get-list-from-system
-                :exists-in-system-p
                 :get-current-operating-platform)
   (:export :main))
