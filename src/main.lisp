@@ -91,7 +91,7 @@ supplied packages."
   (mapc #'execute-in-system
         (flatten (mapcar (lambda (package-group)
                            (let ((package-manager (find (car package-group)
-                                                        (second system-config)
+                                                        (third system-config)
                                                         :key #'car)))
                              (generate-install-command package-manager
                                                        (cdr package-group))))
