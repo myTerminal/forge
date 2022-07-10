@@ -9,14 +9,14 @@ it in the underlying system, or both, depending on the command-line arguments
 supplied during the program execution."
   (let* ((command-line-arguments (uiop:command-line-arguments))
          (run-mode (first command-line-arguments)))
-    (if (or (string-equal run-mode "0")
-            (string-equal run-mode "2"))
+    (if (or (string-equal run-mode "simulate")
+            (string-equal run-mode "debug"))
         (progn
           (princ (concatenate 'string "[forge executing]: "
                               command-string))
           (fresh-line)))
-    (if (or (string-equal run-mode "1")
-            (string-equal run-mode "2"))
+    (if (or (string-equal run-mode "run")
+            (string-equal run-mode "debug"))
         (uiop:run-program command-string
                           :input :interactive
                           :output *standard-output*
