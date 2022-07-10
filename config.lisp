@@ -1,6 +1,7 @@
 (
  (
   (:debian :apt :flatpak :snap)
+  (:fedora :dnf :flatpak :snap)
   (:arch :pacman :paru :flatpak :snap)
   (:void :xbps :flatpak)
   (:mac :brew :cask)
@@ -72,6 +73,9 @@
   )
  (
   (:apt "apt install"
+        :multi
+        t)
+  (:dnf "dnf install"
         :multi
         t)
   (:pacman "pacman -S"
