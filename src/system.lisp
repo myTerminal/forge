@@ -3,7 +3,7 @@
 
 (in-package :system)
 
-(defun execute-maybe (command-string)
+(defun execute-in-system (command-string)
   "Conditionally chooses between logging the supplied command string, executing
 it in the underlying system, or both, depending on the command-line arguments
 supplied during the program execution."
@@ -22,10 +22,6 @@ supplied during the program execution."
                           :output *standard-output*
                           :error-output t
                           :ignore-error-status t))))
-
-(defun execute-in-system (command-string)
-  "Executes the supplied command string, if its appropriate to do so."
-  (execute-maybe command-string))
 
 (defun get-result-from-system (command-string)
   "Gets the result of execution of the supplied command string in the
