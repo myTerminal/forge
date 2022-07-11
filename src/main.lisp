@@ -177,19 +177,25 @@ steps."
            (forge-user-config (file-to-string user-config-file-path))
            (current-platform (get-current-operating-platform)))
 
-      ;; Setup/Add software sources for the current platform
-      (execute-steps (get-applicable-steps current-platform
-                                           (second forge-system-config)))
+      (flet ((translate-package-entries (entries)
+               (mapcar (lambda (entry)
+                         (if (listp entry)
+                             entry
+                             `(,entry)))
+                       entries)))
+        ;; Setup/Add software sources for the current platform
+        (execute-steps (get-applicable-steps current-platform
+                                             (second forge-system-config)))
 
-      ;; Install packages for current platform
-      (install-packages (third forge-system-config)
-                        (get-relevant-package-groups current-platform
-                                                     (first forge-system-config)
-                                                     (get-relevant-package-entries current-platform
-                                                                                   (car forge-user-config))))
+        ;; Install packages for current platform
+        (install-packages (third forge-system-config)
+                          (get-relevant-package-groups current-platform
+                                                       (first forge-system-config)
+                                                       (get-relevant-package-entries current-platform
+                                                                                     (translate-package-entries (car forge-user-config)))))
 
-      ;; Execute all applicable user steps
-      (execute-steps (get-applicable-steps current-platform
-                                           (cdr forge-user-config)))))
+        ;; Execute all applicable user steps
+        (execute-steps (get-applicable-steps current-platform
+                                             (cdr forge-user-config))))))
   ;; Notify on completion
   (princ "forge has finished performing the setup!"))

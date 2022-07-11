@@ -1,8 +1,8 @@
 (
  (
   ("archlinux-keyring" (:void nil) (:debian nil))
-  ("cryptsetup")
-  ("efibootmgr")
+  "cryptsetup"
+  "efibootmgr"
   ("fd" (:apt "fd-find"))
   ("i3" (:xbps "i3" "i3status" "i3lock"))
   ("sct" (:paru "sct"))
