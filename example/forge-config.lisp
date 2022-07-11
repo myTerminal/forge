@@ -1,4 +1,5 @@
 (
+ (:void :arch :debian :mac)
  (
   ("archlinux-keyring" (:void nil) (:debian nil))
   "cryptsetup"

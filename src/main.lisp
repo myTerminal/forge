@@ -183,6 +183,13 @@ steps."
                              entry
                              `(,entry)))
                        entries)))
+        ;; Validate current platform against user config
+        (unless (member current-platform
+                        (first forge-user-config))
+          (princ "Current platform is not supported for supplied config!")
+          (fresh-line)
+          (uiop:quit))
+
         ;; Setup/Add software sources for the current platform
         (execute-steps (get-applicable-steps current-platform
                                              (second forge-system-config)))
@@ -192,10 +199,10 @@ steps."
                           (get-relevant-package-groups current-platform
                                                        (first forge-system-config)
                                                        (get-relevant-package-entries current-platform
-                                                                                     (translate-package-entries (car forge-user-config)))))
+                                                                                     (translate-package-entries (second forge-user-config)))))
 
         ;; Execute all applicable user steps
         (execute-steps (get-applicable-steps current-platform
-                                             (cdr forge-user-config))))))
+                                             (cddr forge-user-config))))))
   ;; Notify on completion
   (princ "forge has finished performing the setup!"))
