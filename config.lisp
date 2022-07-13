@@ -72,32 +72,87 @@
    )
   )
  (
-  (:apt "apt install"
-        :multi
-        t)
-  (:dnf "dnf install"
-        :multi
-        t)
-  (:pacman "pacman -S"
-           :multi
-           t)
-  (:paru "paru -S"
-         :multi
-         nil)
-  (:xbps "xbps-install -S"
-         :multi
-         t)
-  (:flatpak "flatpak install"
-            :single
-            nil)
-  (:snap "snap install"
-         :single
-         t)
-  (:brew "brew install"
-         :multi
-         nil)
-  (:cask "brew install --cask"
-         :multi
-         nil)
+  (:apt (lambda (entries)
+          (concatenate 'string
+                       "sudo apt install "
+                       (reduce (lambda (a p)
+                                 (concatenate 'string
+                                              a
+                                              " "
+                                              p))
+                               entries
+                               :initial-value ""))))
+  (:dnf (lambda (entries)
+          (concatenate 'string
+                       "sudo dnf install "
+                       (reduce (lambda (a p)
+                                 (concatenate 'string
+                                              a
+                                              " "
+                                              p))
+                               entries
+                               :initial-value ""))))
+  (:pacman (lambda (entries)
+             (concatenate 'string
+                          "sudo pacman -S "
+                          (reduce (lambda (a p)
+                                    (concatenate 'string
+                                                 a
+                                                 " "
+                                                 p))
+                                  entries
+                                  :initial-value ""))))
+  (:paru (lambda (entries)
+           (concatenate 'string
+                        "paru -S "
+                        (reduce (lambda (a p)
+                                  (concatenate 'string
+                                               a
+                                               " "
+                                               p))
+                                entries
+                                :initial-value ""))))
+  (:xbps (lambda (entries)
+           (concatenate 'string
+                        "sudo xbps-install -S "
+                        (reduce (lambda (a p)
+                                  (concatenate 'string
+                                               a
+                                               " "
+                                               p))
+                                entries
+                                :initial-value ""))))
+  (:flatpak (lambda (entries)
+              (mapcar (lambda (p)
+                        (concatenate 'string
+                                     "flatpak install "
+                                     (first p)))
+                      entries)))
+  (:snap (lambda (entries)
+           (mapcar (lambda (p)
+                     (concatenate 'string
+                                  "snap install "
+                                  p))
+                   entries)))
+  (:brew (lambda (entries)
+           (concatenate 'string
+                        "brew install "
+                        (reduce (lambda (a p)
+                                  (concatenate 'string
+                                               a
+                                               " "
+                                               p))
+                                entries
+                                :initial-value ""))))
+  (:cask (lambda (entries)
+           (concatenate 'string
+                        "brew install --cask "
+                        (reduce (lambda (a p)
+                                  (concatenate 'string
+                                               a
+                                               " "
+                                               p)
+                                  entries)
+                                :initial-value ""))))
   )
  )

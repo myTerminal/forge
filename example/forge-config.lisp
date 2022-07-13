@@ -7,7 +7,7 @@
   ("fd" (:apt "fd-find"))
   ("i3" (:xbps "i3" "i3status" "i3lock"))
   ("sct" (:paru "sct"))
-  ("postman" (:flatpak "com.getpostman.Postman"))
+  ("postman" (:flatpak ("com.getpostman.Postman" "postman")))
   )
  (
   "This generic setup step will run all all platforms"

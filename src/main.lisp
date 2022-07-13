@@ -61,40 +61,16 @@ from their respective package entries."
                                                                     relevant-packages)))))
             known-package-managers)))
 
-(defun generate-install-command (package-manager packages)
-  "Generates installation command for the supplied package-manage for the
-supplied packages."
-  (let ((command-prefix (concatenate 'string
-                                     (if (fourth package-manager)
-                                         "sudo ")
-                                     (second package-manager))))
-    (if (equal (third package-manager)
-               :multi)
-        (concatenate 'string
-                     command-prefix
-                     " "
-                     (reduce (lambda (a b)
-                               (concatenate 'string
-                                            a
-                                            " "
-                                            b))
-                             packages))
-        (mapcar (lambda (package)
-                  (concatenate 'string
-                               command-prefix
-                               " "
-                               package))
-                packages))))
-
 (defun install-packages (package-manager-commands package-groups)
   "Installs the supplied package-groups using the supplied system config."
   (mapc #'execute-in-system
         (flatten (mapcar (lambda (package-group)
-                           (let ((package-manager (find (car package-group)
-                                                        package-manager-commands
-                                                        :key #'car)))
-                             (generate-install-command package-manager
-                                                       (cdr package-group))))
+                           (let* ((package-manager (find (car package-group)
+                                                         package-manager-commands
+                                                         :key #'car))
+                                  (package-install (coerce (second package-manager)
+                                                           'function)))
+                             (funcall package-install (cdr package-group))))
                          package-groups))))
 
 (defun get-applicable-steps (current-platform steps)
