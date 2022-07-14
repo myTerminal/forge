@@ -65,3 +65,8 @@ a list."
         ((exists-in-system-p "apt")
          :debian)
         (t nil)))
+
+(defun reboot-system ()
+  "Reboots the machine."
+  ;; TODO: Implement
+  (print "restarting..."))

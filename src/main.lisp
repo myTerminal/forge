@@ -183,4 +183,7 @@ steps."
         (execute-steps (get-applicable-steps current-platform
                                              (cddr forge-user-config))))))
   ;; Notify on completion
-  (princ "forge has finished performing the setup!"))
+  (princ "forge has finished performing the setup! Restart (Y/n)?")
+  (fresh-line)
+  (if (prompt-y-or-n)
+      (reboot-system)))

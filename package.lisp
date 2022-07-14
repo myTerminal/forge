@@ -14,7 +14,8 @@
            :get-list-from-system
            :exists-in-system-p
            :clear-screen
-           :get-current-operating-platform))
+           :get-current-operating-platform
+           :reboot-system))
 
 (defpackage :main
   (:use :cl)
@@ -25,5 +26,6 @@
                 :clear-screen
                 :execute-in-system
                 :prompt-y-or-n
-                :get-current-operating-platform)
+                :get-current-operating-platform
+                :reboot-system)
   (:export :main))
