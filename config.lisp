@@ -49,6 +49,16 @@
            "rm -rf ./temp"))
    )
   (
+   "Install Home Brew for macOS"
+   nil
+   (:mac ("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""))
+   )
+  (
+   "Install svn as a dependency for few packages"
+   nil
+   (:mac ("brew install svn"))
+   )
+  (
    "Install flatpak"
    t
    (:debian ("sudo apt install flatpak -y"
