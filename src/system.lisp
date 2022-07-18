@@ -68,5 +68,7 @@ a list."
 
 (defun reboot-system ()
   "Reboots the machine."
-  ;; TODO: Implement
-  (print "restarting..."))
+  (cond ((exists-in-system-p "systemctl") (execute-in-system "systemctl reboot"))
+        ((exists-in-system-p "loginctl") (execute-in-system "loginctl reboot"))
+        ((exists-in-system-p "reboot") (execute-in-system "sudo reboot"))
+        (t (princ "Unable to reboot automatically. Please reboot to apply changes."))))
