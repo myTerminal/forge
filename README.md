@@ -4,7 +4,7 @@
 
 Quickly create your daily-driver workstation setup from a simple-to-read configuration file
 
-## What is it?
+## What is *forge*?
 
 *forge* tends to provide a way to quickly configure a Linux (or UNIX-like) setup by automating the process of setting up package repositories, installing software packages, creating users, and other such steps involved in setting up a typical daily driver.
 
@@ -14,15 +14,23 @@ This project takes birth from [one of my oldest projects](https://github.com/myT
 
 ## Supported Platforms
 
-(Coming soon...)
+- [Void](https://voidlinux.org) (untested)
+- [Arch](https://archlinux.org) (untested)
+- [Fedora](https://getfedora.org) (untested)
+- [Debian](https://www.debian.org) (untested)
+- [macOS](https://www.apple.com/macos) (untested)
 
 ## External Dependencies
 
-(Coming soon...)
+- [SBCL](http://www.sbcl.org)
 
 ## How to Use
 
 (Coming soon...)
+
+## Example(s)
+
+Please refer to [the example config file](example/forge-config.lisp) for basic layout or view [one that is being used](https://github.com/myTerminal/dotfiles/blob/master/.setup/forge-config.lisp) for a more detailed example.
 
 ## To-Do
 
