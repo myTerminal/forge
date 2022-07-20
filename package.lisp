@@ -8,7 +8,12 @@
   (:use :cl)
   (:import-from :utils
                 :string-to-list)
-  (:export :print-new-line
+  (:export :print-info
+           :print-question
+           :print-success
+           :print-warning
+           :print-error
+           :print-new-line
            :execute-in-system
            :get-result-from-system
            :prompt-y-or-n
@@ -24,6 +29,11 @@
                 :flatten
                 :file-to-string)
   (:import-from :system
+                :print-info
+                :print-question
+                :print-success
+                :print-warning
+                :print-error
                 :print-new-line
                 :clear-screen
                 :execute-in-system

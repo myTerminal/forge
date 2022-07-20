@@ -3,8 +3,50 @@
 
 (in-package :system)
 
+(defun print-colored-text (text color)
+  "Prints the supplied text with the specified color."
+  (format t
+          (concatenate 'string
+                       "~c["
+                       (case color
+                         ((:red) "31")
+                         ((:cyan) "96")
+                         ((:green) "92")
+                         ((:yellow) "93")
+                         ((:magenta) "95")
+                         (otherwise "97"))
+                       "m"
+                       text
+                       "~c[0m~%")
+          #\ESC #\ESC))
+
+(defun print-info (text)
+  "Prints the supplied informational text to the terminal."
+  (print-colored-text text
+                      :yellow))
+
+(defun print-question (text)
+  "Prints the supplied question to the terminal."
+  (print-colored-text text
+                      :cyan))
+
+(defun print-success (text)
+  "Prints the supplied success message to the terminal."
+  (print-colored-text text
+                      :green))
+
+(defun print-warning (text)
+  "Prints the supplied warning to the terminal."
+  (print-colored-text text
+                      :magenta))
+
+(defun print-error (text)
+  "Prints the supplied error to the terminal."
+  (print-colored-text text
+                      :red))
+
 (defun print-new-line ()
-  "Prints new-line on the terminal console"
+  "Prints new-line on the terminal console."
   (princ #\newline))
 
 (defun execute-in-system (command-string)
