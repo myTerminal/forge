@@ -57,10 +57,8 @@ supplied during the program execution."
          (run-mode (first command-line-arguments)))
     (if (or (string-equal run-mode "simulate")
             (string-equal run-mode "debug"))
-        (progn
-          (princ (concatenate 'string "[forge executing]: "
-                              command-string))
-          (fresh-line)))
+        (print-warning (concatenate 'string "[forge executing]: "
+                                    command-string)))
     (if (or (string-equal run-mode "run")
             (string-equal run-mode "debug"))
         (uiop:run-program command-string
@@ -117,4 +115,4 @@ a list."
   (cond ((exists-in-system-p "systemctl") (execute-in-system "systemctl reboot"))
         ((exists-in-system-p "loginctl") (execute-in-system "loginctl reboot"))
         ((exists-in-system-p "reboot") (execute-in-system "sudo reboot"))
-        (t (princ "Unable to reboot automatically. Please reboot to apply changes."))))
+        (t (print-error "Unable to reboot automatically. Please reboot to apply changes."))))

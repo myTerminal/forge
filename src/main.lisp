@@ -5,18 +5,12 @@
 
 (defun print-help ()
   "Prints help text for the program."
-  (princ "No arguments specified!")
-  (fresh-line)
-  (princ "Please specify a run-mode and optionally a config.")
-  (fresh-line)
-  (princ "Following run-modes are available:")
-  (fresh-line)
-  (princ "simulate - Log commands to be executed, only simulate a run")
-  (fresh-line)
-  (princ "run - Execute commands as usual")
-  (fresh-line)
-  (princ "debug - Do a combination of both 0 and 1")
-  (fresh-line))
+  (print-error "No arguments specified!")
+  (print-info "Please specify a run-mode and optionally a config.")
+  (print-info "Following run-modes are available:")
+  (print-info "simulate - Log commands to be executed, only simulate a run")
+  (print-info "run - Execute commands as usual")
+  (print-info "debug - Do a combination of both 0 and 1"))
 
 (defun get-relevant-package-entries (current-platform packages)
   "Gets package entries from the configuration that are relevant for the
@@ -100,25 +94,21 @@ steps."
 (defun execute-step-commands (commands)
   "Execute commands contained in the steps."
   (mapc (lambda (command)
-          (fresh-line)
           (execute-in-system command))
         commands))
 
 (defun execute-step (step)
   "Executes the supplied step."
   (print-new-line)
-  (princ (first step))
+  (print-info (first step))
   (if (third step)
       (progn
-        (princ " > Run (Y/n)?")
-        (fresh-line)
+        (print-question " > Run (Y/n)?")
         (if (prompt-y-or-n)
             (execute-step-commands (second step))
-            (progn
-              (princ (concatenate 'string
-                                  "[Skipped]: "
-                                  (first step)))
-              (fresh-line))))
+            (print-info (concatenate 'string
+                                     "[Skipped]: "
+                                     (first step)))))
       (execute-step-commands (second step))))
 
 (defun execute-steps (steps)
@@ -144,8 +134,7 @@ steps."
     (unless (find (first command-line-arguments)
                   '("simulate" "run" "debug")
                   :test #'string-equal)
-      (princ "Please specify a valid run-mode!")
-      (fresh-line)
+      (print-error "Please specify a valid run-mode!")
       (uiop:quit))
 
     ;; Load configs and continue
@@ -165,8 +154,7 @@ steps."
         ;; Validate current platform against user config
         (unless (member current-platform
                         (first forge-user-config))
-          (princ "Current platform is not supported for supplied config!")
-          (fresh-line)
+          (print-error "Current platform is not supported for supplied config!")
           (uiop:quit))
 
         ;; Setup/Add software sources for the current platform
@@ -184,7 +172,8 @@ steps."
         (execute-steps (get-applicable-steps current-platform
                                              (cddr forge-user-config))))))
   ;; Notify on completion
-  (princ "forge has finished performing the setup! Restart (Y/n)?")
   (print-new-line)
+  (print-success "forge has finished performing the setup!")
+  (print-question "Restart (Y/n)?")
   (if (prompt-y-or-n)
       (reboot-system)))
