@@ -3,6 +3,10 @@
 
 (in-package :system)
 
+(defun print-new-line ()
+  "Prints new-line on the terminal console"
+  (princ #\newline))
+
 (defun execute-in-system (command-string)
   "Conditionally chooses between logging the supplied command string, executing
 it in the underlying system, or both, depending on the command-line arguments

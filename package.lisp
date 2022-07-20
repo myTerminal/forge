@@ -8,7 +8,8 @@
   (:use :cl)
   (:import-from :utils
                 :string-to-list)
-  (:export :execute-in-system
+  (:export :print-new-line
+           :execute-in-system
            :get-result-from-system
            :prompt-y-or-n
            :get-list-from-system
@@ -23,6 +24,7 @@
                 :flatten
                 :file-to-string)
   (:import-from :system
+                :print-new-line
                 :clear-screen
                 :execute-in-system
                 :prompt-y-or-n
