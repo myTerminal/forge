@@ -72,6 +72,7 @@ from their respective package entries."
                                                          :key #'car))
                                   (package-install (coerce (second package-manager)
                                                            'function)))
+                             (print-new-line)
                              (funcall package-install (cdr package-group))))
                          package-groups))))
 
@@ -105,7 +106,7 @@ steps."
 
 (defun execute-step (step)
   "Executes the supplied step."
-  (fresh-line)
+  (print-new-line)
   (princ (first step))
   (if (third step)
       (progn
@@ -184,6 +185,6 @@ steps."
                                              (cddr forge-user-config))))))
   ;; Notify on completion
   (princ "forge has finished performing the setup! Restart (Y/n)?")
-  (fresh-line)
+  (print-new-line)
   (if (prompt-y-or-n)
       (reboot-system)))
