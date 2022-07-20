@@ -2,12 +2,14 @@
   (:use :cl)
   (:export :flatten
            :string-to-list
-           :file-to-string))
+           :file-to-string
+           :replace-char-in-string))
 
 (defpackage :system
   (:use :cl)
   (:import-from :utils
-                :string-to-list)
+                :string-to-list
+                :replace-char-in-string)
   (:export :print-info
            :print-question
            :print-success

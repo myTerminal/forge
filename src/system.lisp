@@ -3,6 +3,16 @@
 
 (in-package :system)
 
+(defun escape-risky-chars (input)
+  "Replaces characters in the supplied string that have been known to cause issues on the terminal."
+  (let ((pos-in-string (search "~"
+                               input)))
+    (if pos-in-string
+        (replace-char-in-string input
+                                #\~
+                                "$HOME")
+        input)))
+
 (defun print-colored-text (text color)
   "Prints the supplied text with the specified color."
   (format t
@@ -16,7 +26,7 @@
                          ((:magenta) "95")
                          (otherwise "97"))
                        "m"
-                       text
+                       (escape-risky-chars text)
                        "~c[0m~%")
           #\ESC #\ESC))
 

@@ -38,3 +38,14 @@
                                     for line = (read-line file-stream nil nil)
                                     while line
                                     collect line)))))
+
+(defun replace-char-in-string (input search-char substitute)
+  "Replaces the given character in supplied string with a specified string"
+  (reduce (lambda (a b)
+            (concatenate 'string a b))
+          (mapcar (lambda (char)
+                    (if (eql char search-char)
+                        substitute
+                        (string char)))
+                  (coerce input
+                          'list))))
