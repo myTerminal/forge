@@ -73,7 +73,7 @@ supplied during the program execution."
             (string-equal run-mode "debug"))
         (uiop:run-program command-string
                           :input :interactive
-                          :output *standard-output*
+                          :output :interactive
                           :error-output t
                           :ignore-error-status t))))
 
