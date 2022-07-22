@@ -84,7 +84,7 @@
  (
   (:apt (lambda (entries)
           (concatenate 'string
-                       "sudo apt install "
+                       "sudo apt install -y "
                        (reduce (lambda (a p)
                                  (concatenate 'string
                                               a
@@ -94,7 +94,7 @@
                                :initial-value ""))))
   (:dnf (lambda (entries)
           (concatenate 'string
-                       "sudo dnf install "
+                       "sudo dnf install -y "
                        (reduce (lambda (a p)
                                  (concatenate 'string
                                               a
@@ -104,7 +104,7 @@
                                :initial-value ""))))
   (:pacman (lambda (entries)
              (concatenate 'string
-                          "sudo pacman -S "
+                          "sudo pacman -S --noconfirm "
                           (reduce (lambda (a p)
                                     (concatenate 'string
                                                  a
@@ -114,7 +114,7 @@
                                   :initial-value ""))))
   (:paru (lambda (entries)
            (concatenate 'string
-                        "paru -S "
+                        "paru -S --noconfirm "
                         (reduce (lambda (a p)
                                   (concatenate 'string
                                                a
@@ -124,7 +124,7 @@
                                 :initial-value ""))))
   (:xbps (lambda (entries)
            (concatenate 'string
-                        "sudo xbps-install -S "
+                        "sudo xbps-install -Sy "
                         (reduce (lambda (a p)
                                   (concatenate 'string
                                                a
@@ -135,13 +135,13 @@
   (:flatpak (lambda (entries)
               (mapcar (lambda (p)
                         (concatenate 'string
-                                     "flatpak install "
+                                     "flatpak install -y "
                                      (first p)))
                       entries)))
   (:snap (lambda (entries)
            (mapcar (lambda (p)
                      (concatenate 'string
-                                  "snap install "
+                                  "snap install -y "
                                   p))
                    entries)))
   (:brew (lambda (entries)
