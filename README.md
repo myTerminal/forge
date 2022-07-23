@@ -14,7 +14,7 @@ This project takes birth from [one of my oldest projects](https://github.com/myT
 
 ## Supported Platforms
 
-- [Void](https://voidlinux.org) (untested)
+- [Void](https://voidlinux.org) (almost tested)
 - [Arch](https://archlinux.org) (untested)
 - [Fedora](https://getfedora.org) (untested)
 - [Debian](https://www.debian.org) (untested)
@@ -22,7 +22,13 @@ This project takes birth from [one of my oldest projects](https://github.com/myT
 
 ## External Dependencies
 
+Dependencies that are (mostly) installed automatically:
+
 - [SBCL](http://www.sbcl.org)
+
+Rest of the dependencies that are also needed:
+
+- [MAKE](https://www.gnu.org/software/make)
 
 ## How to Use
 
