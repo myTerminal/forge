@@ -54,6 +54,11 @@
    (:mac ("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""))
    )
   (
+   "Tap homebrew/cask-fonts for macOS"
+   nil
+   (:mac ("brew tap homebrew/cask-fonts"))
+   )
+  (
    "Install svn as a dependency for few packages"
    nil
    (:mac ("brew install svn"))
