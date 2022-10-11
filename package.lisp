@@ -5,7 +5,7 @@
            :file-to-string
            :replace-char-in-string))
 
-(defpackage :system
+(defpackage :shell
   (:use :cl)
   (:import-from :utils
                 :string-to-list
@@ -30,7 +30,7 @@
   (:import-from :utils
                 :flatten
                 :file-to-string)
-  (:import-from :system
+  (:import-from :shell
                 :print-info
                 :print-question
                 :print-success

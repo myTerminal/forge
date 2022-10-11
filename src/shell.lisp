@@ -1,7 +1,7 @@
 ;;;; -------------------------------------------------------------------------
 ;;;; Access to host system
 
-(in-package :system)
+(in-package :shell)
 
 (defun escape-risky-chars (input)
   "Replaces characters in the supplied string that have been known to cause issues on the terminal."
