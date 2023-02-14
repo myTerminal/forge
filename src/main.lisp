@@ -116,7 +116,7 @@ steps."
   (mapc #'execute-step
         steps))
 
-(defun main ()
+(defun run ()
   "The main entry point to the program."
   ;; Clear the screen before starting the program
   (clear-screen)
@@ -177,3 +177,10 @@ steps."
   (print-question "Restart (Y/n)?")
   (if (prompt-y-or-n)
       (reboot-system)))
+
+(defun main ()
+  "A wrapper over the main entry point to the program."
+  (handler-case (run)
+    (sb-sys:interactive-interrupt ()
+      (format t "forge was quit.~%")
+      (sb-ext:quit))))

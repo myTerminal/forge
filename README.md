@@ -44,7 +44,3 @@ The above assumes that you are running the command at the root of the project di
 ## Example(s)
 
 Please refer to [the example config file](example/forge-config.lisp) for the basic layout or view [one that is being used](https://github.com/myTerminal/dotfiles/blob/master/.setup/forge-config.lisp) for a more detailed example.
-
-## To-Do
-
-- Detection of C-c interrupt
