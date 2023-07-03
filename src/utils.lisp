@@ -29,8 +29,8 @@
       (collect-item)
       (reverse items))))
 
-(defun file-to-string (file-path)
-  "Reads and returns the contents of a text file as a string."
+(defun read-from-file (file-path)
+  "Reads a file as string and parses it."
   (with-open-file (file-stream file-path)
     (read-from-string (reduce (lambda (a b)
                                 (concatenate 'string a b))

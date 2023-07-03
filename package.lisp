@@ -2,7 +2,7 @@
   (:use :cl)
   (:export :flatten
            :string-to-list
-           :file-to-string
+           :read-from-file
            :replace-char-in-string))
 
 (defpackage :shell
@@ -29,7 +29,7 @@
   (:use :cl)
   (:import-from :utils
                 :flatten
-                :file-to-string)
+                :read-from-file)
   (:import-from :shell
                 :print-info
                 :print-question

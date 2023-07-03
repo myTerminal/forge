@@ -139,10 +139,10 @@ steps."
 
     ;; Load configs and continue
     (let* ((system-config-file-path "config.lisp")
-           (forge-system-config (file-to-string system-config-file-path))
+           (forge-system-config (read-from-file system-config-file-path))
            (user-config-file-path (or (second command-line-arguments)
                                       "example/forge-config.lisp"))
-           (forge-user-config (file-to-string user-config-file-path))
+           (forge-user-config (read-from-file user-config-file-path))
            (current-platform (get-current-operating-platform)))
 
       (flet ((translate-package-entries (entries)
