@@ -29,4 +29,4 @@ binary:
 	sbcl --non-interactive --load build.lisp
 
 setup: sbcl quicklisp binary
-	@echo "forge is now installed."
+	@echo "forge setup complete."
