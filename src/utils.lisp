@@ -4,7 +4,7 @@
 (in-package :utils)
 
 (defun flatten (items)
-  "Flattens the supplied nested list into a single-dimentional list."
+  "Flattens the supplied nested list into a single-dimensional list."
   (reduce (lambda (a item)
             (append a
                     (if (listp item)
