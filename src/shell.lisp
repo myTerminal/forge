@@ -65,8 +65,10 @@ it in the underlying system, or both, depending on the command-line arguments
 supplied during the program execution."
   (let* ((command-line-arguments (uiop:command-line-arguments))
          (run-mode (first command-line-arguments)))
-    (if (or (string-equal run-mode "simulate")
-            (string-equal run-mode "debug"))
+    (if (string-equal run-mode "simulate")
+        (print-warning (concatenate 'string "[forge simulating]: "
+                                    command-string)))
+    (if (string-equal run-mode "debug")
         (print-warning (concatenate 'string "[forge executing]: "
                                     command-string)))
     (if (or (string-equal run-mode "run")
