@@ -1,6 +1,7 @@
 (
  (
   (:debian :apt :flatpak :snap)
+  (:pop :apt :flatpak :snap)
   (:fedora :dnf :flatpak :snap)
   (:arch :pacman :paru :flatpak :snap)
   (:void :xbps :flatpak)
@@ -33,6 +34,8 @@
    nil
    (:debian ("sudo apt update -y"
              "sudo apt upgrade -y"))
+   (:pop ("sudo apt update -y"
+          "sudo apt upgrade -y"))
    (:fedora ("sudo dnf update -y"))
    (:arch ("sudo pacman -Syu --noconfirm"))
    (:void ("sudo xbps-install -Syu"))
@@ -68,6 +71,8 @@
    t
    (:debian ("sudo apt install flatpak -y"
              "sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"))
+   (:pop ("sudo apt install flatpak -y"
+          "sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"))
    (:fedora ("sudo dnf install flatpak -y"
              "sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"))
    (:arch ("sudo pacman -S flatpak --noconfirm"
@@ -80,6 +85,8 @@
    t
    (:debian ("sudo apt install snapd -y"
              "sudo snap install core"))
+   (:pop ("sudo apt install snapd -y"
+          "sudo snap install core"))
    (:fedora ("sudo dnf install snapd -y"
              "sudo snap install core"))
    (:arch ("sudo pacman -S snapd --noconfirm"

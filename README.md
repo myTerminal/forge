@@ -19,6 +19,7 @@ This project takes birth from [one of my oldest projects](https://github.com/myT
 - [Void](https://voidlinux.org) (TESTED)
 - [Arch](https://archlinux.org) (untested)
 - [Fedora](https://getfedora.org) (untested)
+- [Pop!_OS](https://pop.system76.com) (untested)
 - [Debian](https://www.debian.org) (untested)
 - [macOS](https://www.apple.com/macos) (untested)
 - more (untested)
