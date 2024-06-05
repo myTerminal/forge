@@ -7,7 +7,7 @@ ifneq ($(shell command -v sbcl),)
 	@echo "SBCL found."
 else
 	@echo "SBCL not found!"
-	@echo "Attemping to install SBCL using Crater..."
+	@echo "Attempting to install SBCL using Crater..."
 	git clone https://github.com/crater-space/cli /tmp/crater-cli
 	/tmp/crater-cli/crater install sbcl
 	rm -rf /tmp/crater-cli
