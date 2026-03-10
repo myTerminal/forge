@@ -16,12 +16,12 @@ This project takes birth from [one of my oldest projects](https://github.com/myT
 
 ## Supported Platforms
 
-- [Void](https://voidlinux.org) (TESTED)
-- [Pop!_OS](https://pop.system76.com) (TESTED)
-- [Arch](https://archlinux.org) (untested)
-- [Fedora](https://getfedora.org) (untested)
-- [Debian](https://www.debian.org) (untested)
-- [macOS](https://www.apple.com/macos) (untested)
+- 🟢 [Void](https://voidlinux.org) (tested)
+- 🟢 [Pop!_OS](https://pop.system76.com) (tested)
+- 🟡 [Arch](https://archlinux.org) and Arch-based distros (untested, should work)
+- 🟡 [Fedora](https://getfedora.org) and Fedora-based distros (untested, should work)
+- 🟡 [Debian](https://www.debian.org) and Debian/Ubuntu-based distros (untested, should work)
+- 🟡 [macOS](https://www.apple.com/macos) (untested, should work)
 - more (untested)
 
 ## External Dependencies
