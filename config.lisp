@@ -3,6 +3,7 @@
   (:debian :apt :flatpak :snap)
   (:pop :apt :flatpak :snap)
   (:fedora :dnf :flatpak :snap)
+  (:opensuse :zypper :opi :flatpak)
   (:arch :pacman :paru :flatpak :snap)
   (:void :xbps :flatpak)
   (:mac :brew :cask)
@@ -37,8 +38,19 @@
    (:pop ("sudo apt update -y"
           "sudo apt upgrade -y"))
    (:fedora ("sudo dnf update -y"))
+   (:opensuse ("sudo zypper refresh && sudo zypper up -y"))
    (:arch ("sudo pacman -Syu --noconfirm"))
    (:void ("sudo xbps-install -Syu"))
+   )
+  (
+   "Install Open Build Service"
+   nil
+   (:opensuse ("sudo zypper install opi -y"))
+   )
+  (
+   "Install Codecs"
+   nil
+   (:opensuse ("opi codecs"))
    )
   (
    "Install paru for AUR packages"
@@ -75,6 +87,8 @@
           "sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"))
    (:fedora ("sudo dnf install flatpak -y"
              "sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"))
+   (:opensuse ("sudo zypper install flatpak -y"
+               "flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"))
    (:arch ("sudo pacman -S flatpak --noconfirm"
            "sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"))
    (:void ("sudo xbps-install -Sy flatpak"
@@ -107,6 +121,26 @@
   (:dnf (lambda (entries)
           (concatenate 'string
                        "sudo dnf install -y "
+                       (reduce (lambda (a p)
+                                 (concatenate 'string
+                                              a
+                                              " "
+                                              p))
+                               entries
+                               :initial-value ""))))
+  (:zypper (lambda (entries)
+             (concatenate 'string
+                          "sudo zypper install -y "
+                          (reduce (lambda (a p)
+                                    (concatenate 'string
+                                                 a
+                                                 " "
+                                                 p))
+                                  entries
+                                  :initial-value ""))))
+  (:opi (lambda (entries)
+          (concatenate 'string
+                       "opi "
                        (reduce (lambda (a p)
                                  (concatenate 'string
                                               a

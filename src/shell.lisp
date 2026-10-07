@@ -116,6 +116,8 @@ a list."
          :void)
         ((exists-in-system-p "pacman")
          :arch)
+        ((exists-in-system-p "zypper")
+         :opensuse)
         ((exists-in-system-p "dnf")
          :fedora)
         ((string-equal (get-result-from-system "cat /etc/os-release | grep '^ID=' | cut -d '=' -f 2 | cut -d '\"' -f 2")

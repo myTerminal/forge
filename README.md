@@ -21,6 +21,7 @@ This project takes birth from [one of my oldest projects](https://github.com/myT
 - 🟡 [Arch](https://archlinux.org) and Arch-based distros (untested, should work)
 - 🟡 [Fedora](https://getfedora.org) and Fedora-based distros (untested, should work)
 - 🟡 [Debian](https://www.debian.org) and Debian/Ubuntu-based distros (untested, should work)
+- 🟢 [openSUSE](https://www.opensuse.org) (tested)
 - 🟡 [macOS](https://www.apple.com/macos) (untested, should work)
 - more (untested)
 
