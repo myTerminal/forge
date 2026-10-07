@@ -82,17 +82,17 @@
    "Install flatpak"
    t
    (:debian ("sudo apt install flatpak -y"
-             "sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"))
+             "sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"))
    (:pop ("sudo apt install flatpak -y"
-          "sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"))
+          "sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"))
    (:fedora ("sudo dnf install flatpak -y"
-             "sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"))
+             "sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"))
    (:opensuse ("sudo zypper install flatpak -y"
-               "flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"))
+               "flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"))
    (:arch ("sudo pacman -S flatpak --noconfirm"
-           "sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"))
+           "sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"))
    (:void ("sudo xbps-install -Sy flatpak"
-           "sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"))
+           "sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"))
    )
   (
    "Install snapd"
