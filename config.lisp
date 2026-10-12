@@ -48,7 +48,7 @@
    (:opensuse ("sudo zypper install opi -y"))
    )
   (
-   "Install Codecs"
+   "Install Codecs (May need hitting RET a couple of times)"
    nil
    (:opensuse ("opi codecs"))
    )
