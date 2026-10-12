@@ -38,14 +38,14 @@
    (:pop ("sudo apt update -y"
           "sudo apt upgrade -y"))
    (:fedora ("sudo dnf update -y"))
-   (:opensuse ("sudo zypper refresh && sudo zypper up -y"))
+   (:opensuse ("sudo zypper refresh && sudo zypper --non-interactive up"))
    (:arch ("sudo pacman -Syu --noconfirm"))
    (:void ("sudo xbps-install -Syu"))
    )
   (
    "Install Open Build Service"
    nil
-   (:opensuse ("sudo zypper install opi -y"))
+   (:opensuse ("sudo zypper --non-interactive install opi"))
    )
   (
    "Install Codecs (May need hitting RET a couple of times)"
@@ -87,7 +87,7 @@
           "sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"))
    (:fedora ("sudo dnf install flatpak -y"
              "sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"))
-   (:opensuse ("sudo zypper install flatpak -y"
+   (:opensuse ("sudo zypper --non-interactive install flatpak"
                "flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"))
    (:arch ("sudo pacman -S flatpak --noconfirm"
            "sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"))
@@ -130,7 +130,7 @@
                                :initial-value ""))))
   (:zypper (lambda (entries)
              (concatenate 'string
-                          "sudo zypper install -y "
+                          "sudo zypper --non-interactive install "
                           (reduce (lambda (a p)
                                     (concatenate 'string
                                                  a
